@@ -6,8 +6,14 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 import math
 import time
-import keyboard
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+from mpl_toolkits.axes_grid1.axes_divider import make_axes_area_auto_adjustable
+import scienceplots
 
+from matplotlib.pyplot import figure
+
+
+plt.style.use(["default","no-latex"])
 
 # Declare math pi
 pi = math.pi
@@ -55,7 +61,7 @@ qdot = np.zeros(6)
 # Target in joint space
 
 pd0 = p0
-pd0[1] = pd0[1] + 0.02
+pd0[1] = pd0[1] + 0.15
 pdlog = pd0
 
 # trajectory frequency
@@ -69,10 +75,6 @@ K = 10.0 * np.identity(3)
 
 
 for i in range(5000):
-
-    if keyboard.is_pressed('a'):
-        print('Stopping robot')
-        break
 
     # print(time.time() - t_now)
     t_now = time.time()
@@ -132,11 +134,22 @@ for i in range(5000):
 
 
 # plot results
-fig, axs = plt.subplots(3)
-fig.suptitle('Joint tracking')
+fig = plt.figure(figsize=(4, 4))
+
+
 for i in range(3):
-    axs[i].plot(tlog, plog[:, i], 'k', linewidth=2.0)
-    axs[i].plot(tlog, pdlog[:, i], 'r--', linewidth=2.0)
+    axs = fig.add_axes([0.21, ((2-i)/3)*0.82+0.15, 0.7, 0.25])
+    axs.plot(tlog, plog[:, i], 'k', linewidth=1.0)
+    axs.plot(tlog, pdlog[:, i], 'k--', linewidth=2.0)
+    axs.set_xlim([0, 10])
+    axs.set_ylabel('$p_' + str(i+1) + '(t)$',fontsize=14 )
+    
+    if i==2:
+        axs.set_xlabel('Time (s)',fontsize=14 )
+        axs.legend(['$p(t)$','$p_d(t)$'],fontsize=14 )
+    else:
+        axs.set_xticks([])
 
 
+    
 plt.show()
