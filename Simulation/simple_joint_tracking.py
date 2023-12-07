@@ -98,7 +98,7 @@ for i in range(5000):
 
 
     # reaching control signal
-    qdot = qddot - K @ (q - qd)
+    qdot = qddot - 0*K @ (q - qd)
 
 
 
@@ -122,7 +122,8 @@ for i in range(6):
     
     if i==5:
         axs.set_xlabel('Time (s)',fontsize=14 )
-        axs.legend(['$q(t)$','$q_d(t)$'],fontsize=12 )
+        lgnd = axs.legend(['$q(t)$','$q_d(t)$'],fontsize=9,ncol=2,loc="upper right")
+        lgnd.get_frame().set_alpha(None)
     else:
         axs.set_xticks([])
 

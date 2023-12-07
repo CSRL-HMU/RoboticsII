@@ -59,7 +59,9 @@ qdot = np.zeros(6)
 # Target in joint space
 
 pd0 = p0
-pd0[1] = pd0[1] + 0.15
+pd0[0] = pd0[0] + 0.02
+pd0[1] = pd0[1] - 0.15
+pd0[2] = pd0[2] - 0.15
 pdlog = pd0
 
 # trajectory frequency
@@ -144,7 +146,8 @@ for i in range(3):
     
     if i==2:
         axs.set_xlabel('Time (s)',fontsize=14 )
-        axs.legend(['$p(t)$','$p_d(t)$'],fontsize=12 )
+        lgnd = axs.legend(['$p(t)$','$p_d(t)$'],fontsize=11,ncol=2,loc="lower right")
+        lgnd.get_frame().set_alpha(None)
     else:
         axs.set_xticks([])
 
