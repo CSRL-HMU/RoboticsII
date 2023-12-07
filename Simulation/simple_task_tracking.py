@@ -6,8 +6,6 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 import math
 import time
-from mpl_toolkits.axes_grid1 import make_axes_locatable
-from mpl_toolkits.axes_grid1.axes_divider import make_axes_area_auto_adjustable
 import scienceplots
 
 from matplotlib.pyplot import figure
@@ -146,7 +144,7 @@ for i in range(3):
     
     if i==2:
         axs.set_xlabel('Time (s)',fontsize=14 )
-        axs.legend(['$p(t)$','$p_d(t)$'],fontsize=14 )
+        axs.legend(['$p(t)$','$p_d(t)$'],fontsize=12 )
     else:
         axs.set_xticks([])
 

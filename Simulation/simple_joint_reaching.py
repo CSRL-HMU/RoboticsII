@@ -6,7 +6,12 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 import math
 import time
-import keyboard
+import scienceplots
+
+from matplotlib.pyplot import figure
+
+
+plt.style.use(["default","no-latex"])
 
 
 # Declare math pi
@@ -57,10 +62,6 @@ K = 0.5 * np.identity(6)
 
 for i in range(5000):
 
-    if keyboard.is_pressed('a'):
-        print('Stopping robot')
-        break
-
     # print(time.time() - t_now)
     t_now = time.time()
     
@@ -87,15 +88,25 @@ for i in range(5000):
 
 
 
-print('Heelo')
 
 
 # plot results
-fig, axs = plt.subplots(6)
-fig.suptitle('Joint tracking')
+fig = plt.figure(figsize=(4, 6))
+
+
 for i in range(6):
-    axs[i].plot(tlog, qlog[:, i], 'k', linewidth=2.0)
-    axs[i].plot(tlog, qTlog[:, i], 'r--', linewidth=2.0)
+    axs = fig.add_axes([0.21, ((5-i)/6)*0.9+0.1, 0.7, 0.12])
+    axs.plot(tlog, qlog[:, i], 'k', linewidth=1.0)
+    axs.plot(tlog, qTlog[:, i], 'k--', linewidth=2.0)
+    axs.set_xlim([0, 10])
+    axs.set_ylabel('$q_' + str(i+1) + '(t)$',fontsize=14 )
+    
+    if i==5:
+        axs.set_xlabel('Time (s)',fontsize=14 )
+        axs.legend(['$q(t)$','$q_T(t)$'],fontsize=12 )
+    else:
+        axs.set_xticks([])
 
 
+    
 plt.show()
