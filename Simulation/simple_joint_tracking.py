@@ -98,7 +98,7 @@ for i in range(5000):
 
 
     # reaching control signal
-    qdot = qddot - 0*K @ (q - qd)
+    qdot = qddot - K @ (q - qd)
 
 
 
