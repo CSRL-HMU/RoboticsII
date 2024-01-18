@@ -31,7 +31,7 @@ rtde_c.moveJ(q0c, 0.5, 0.5)
 q0 = np.array(rtde_r.getActualQ())
 
 
-# Create the robot (both for Leader and Follower)
+# Create the robot
 ur = rt.models.UR5()
 
 # Control cycle
@@ -100,7 +100,7 @@ for i in range(5000):
     q = np.array(rtde_r.getActualQ())
 
 
-    # reaching control signal
+    # tracking control signal
     qdot = qddot - K @ (q - qd)
 
 
