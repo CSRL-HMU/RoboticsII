@@ -27,7 +27,7 @@ q0c = q0c * pi / 180.0  # degrees to rad
 # Move to the initial configuration
 rtde_c.moveJ(q0c, 0.5, 0.5)
 
-# Create the robot (both for Leader and Follower)
+# Create the robot 
 ur = rt.models.UR5()
 
 # Get initial configuration
@@ -119,7 +119,7 @@ for i in range(5000):
     # pseudoInverse
     JpInv = np.linalg.pinv(Jp)
 
-    # reaching control signal
+    # tracking control signal
     qdot = JpInv @ (pddot - K @ (p - pd))
 
 
